@@ -1,6 +1,7 @@
 package minji.board.service;
 
 import lombok.RequiredArgsConstructor;
+import minji.board.controller.dto.BoardRequestDTO;
 import minji.board.model.BoardEntity;
 import minji.board.repository.BoardRepository;
 import org.springframework.stereotype.Service;
@@ -18,5 +19,12 @@ public class BoardService {
     public List<BoardEntity> getBoardList(){
         List<BoardEntity> findBoardList = boardRepository.findAll();
         return findBoardList;
+    }
+
+    @Transactional
+    public BoardEntity create(BoardRequestDTO boardRequestDTO){
+        BoardEntity board = boardRepository.save(boardRequestDTO.toBoardEntity());
+
+        return board;
     }
 }

@@ -1,9 +1,13 @@
 package minji.board.model;
 
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "board")
+@NoArgsConstructor
 public class BoardEntity {
 
     @Id
@@ -12,4 +16,9 @@ public class BoardEntity {
 
     private String title;
     private String content;
+
+    public BoardEntity(String title, String content){
+        this.title = title;
+        this.content = content;
+    }
 }

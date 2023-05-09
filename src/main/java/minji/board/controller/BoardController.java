@@ -1,13 +1,12 @@
 package minji.board.controller;
 
 import lombok.RequiredArgsConstructor;
+import minji.board.controller.dto.BoardRequestDTO;
 import minji.board.model.BoardEntity;
 import minji.board.service.BoardService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,9 +16,16 @@ import java.util.List;
 public class BoardController {
     private final BoardService boardService;
 
-    @GetMapping("/board")
+    @GetMapping("/boards")
     public ResponseEntity<List<BoardEntity>> findBoard(){
         List<BoardEntity> boardEntityList = boardService.getBoardList();
         return new ResponseEntity<>(boardEntityList, HttpStatus.OK);
+    }
+    @PostMapping("/boards")
+    public ResponseEntity<BoardEntity> createBoard(
+            @RequestBody BoardRequestDTO boardRequestDTO
+    ){
+        BoardEntity responseBoard = boardService.create(boardRequestDTO);
+        return new ResponseEntity<>(responseBoard, HttpStatus.OK);
     }
 }
