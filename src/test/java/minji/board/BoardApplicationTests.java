@@ -1,10 +1,10 @@
-package minji.mission1.mission1;
+package minji.board;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Mission1ApplicationTests {
+class BoardApplicationTests {
 
     @Test
     void contextLoads() {

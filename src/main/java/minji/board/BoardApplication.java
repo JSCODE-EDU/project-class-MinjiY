@@ -1,13 +1,13 @@
-package minji.mission1.mission1;
+package minji.board;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Mission1Application {
+public class BoardApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Mission1Application.class, args);
+        SpringApplication.run(BoardApplication.class, args);
     }
 
 }
