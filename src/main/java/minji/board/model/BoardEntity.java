@@ -23,4 +23,8 @@ public class BoardEntity {
         this.title = title;
         this.content = content;
     }
+    public void setBoard(String title, String content){
+        this.title = title;
+        this.content = content;
+    }
 }

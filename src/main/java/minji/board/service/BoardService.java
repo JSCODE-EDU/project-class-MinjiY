@@ -30,7 +30,16 @@ public class BoardService {
     @Transactional
     public BoardEntity create(BoardRequestDTO boardRequestDTO){
         BoardEntity board = boardRepository.save(boardRequestDTO.toBoardEntity());
-
         return board;
     }
+
+    @Transactional
+    public BoardEntity setBoard(Long boardId, BoardRequestDTO boardRequestDTO){
+        BoardEntity board = boardRepository.findById(boardId).orElseThrow(IllegalArgumentException::new);
+        board.setBoard(boardRequestDTO.getTitle(), boardRequestDTO.getContent());
+        BoardEntity responseBoard = boardRepository.save(board);
+        return responseBoard;
+    }
+
+
 }

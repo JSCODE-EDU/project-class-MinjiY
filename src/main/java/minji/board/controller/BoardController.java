@@ -21,6 +21,15 @@ public class BoardController {
         List<BoardEntity> boardEntityList = boardService.getBoardList();
         return new ResponseEntity<>(boardEntityList, HttpStatus.OK);
     }
+
+    @PostMapping("/boards")
+    public ResponseEntity<BoardEntity> createBoard(
+            @RequestBody BoardRequestDTO boardRequestDTO
+    ){
+        BoardEntity responseBoard = boardService.create(boardRequestDTO);
+        return new ResponseEntity<>(responseBoard, HttpStatus.OK);
+    }
+
     @GetMapping("/boards/{boardId}")
     public ResponseEntity<BoardEntity> findBoard(
             @PathVariable Long boardId
@@ -28,11 +37,13 @@ public class BoardController {
         BoardEntity responseBoard = boardService.getBoard(boardId);
         return new ResponseEntity<>(responseBoard, HttpStatus.OK);
     }
-    @PostMapping("/boards")
-    public ResponseEntity<BoardEntity> createBoard(
+
+    @PutMapping("/boards/{boardId}")
+    public ResponseEntity<BoardEntity> UpdateBoard(
+            @PathVariable Long boardId,
             @RequestBody BoardRequestDTO boardRequestDTO
     ){
-        BoardEntity responseBoard = boardService.create(boardRequestDTO);
+        BoardEntity responseBoard = boardService.setBoard(boardId, boardRequestDTO);
         return new ResponseEntity<>(responseBoard, HttpStatus.OK);
     }
 }
