@@ -46,4 +46,11 @@ public class BoardController {
         BoardEntity responseBoard = boardService.setBoard(boardId, boardRequestDTO);
         return new ResponseEntity<>(responseBoard, HttpStatus.OK);
     }
+    @DeleteMapping("/boards/{boardId}")
+    public ResponseEntity deleteBoard(
+            @PathVariable Long boardId
+    ){
+        String response = boardService.deleteBoard(boardId);
+        return new ResponseEntity(response, HttpStatus.OK);
+    }
 }

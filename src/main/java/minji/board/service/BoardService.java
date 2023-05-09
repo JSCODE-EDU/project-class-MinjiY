@@ -40,6 +40,11 @@ public class BoardService {
         BoardEntity responseBoard = boardRepository.save(board);
         return responseBoard;
     }
+    @Transactional
+    public String deleteBoard(Long boardId){
+        boardRepository.deleteById(boardId);
+        return "DeleteBoard OK";
+    }
 
 
 }
