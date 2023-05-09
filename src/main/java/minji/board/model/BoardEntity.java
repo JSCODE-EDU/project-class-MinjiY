@@ -1,6 +1,7 @@
 package minji.board.model;
 
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "board")
 @NoArgsConstructor
+@Getter
 public class BoardEntity {
 
     @Id

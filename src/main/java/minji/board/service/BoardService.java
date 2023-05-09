@@ -21,6 +21,12 @@ public class BoardService {
         return findBoardList;
     }
 
+    @Transactional(readOnly = true)
+    public BoardEntity getBoard(Long boardId){
+        BoardEntity board = boardRepository.findById(boardId).orElseThrow(IllegalArgumentException::new);
+        return board;
+    }
+
     @Transactional
     public BoardEntity create(BoardRequestDTO boardRequestDTO){
         BoardEntity board = boardRepository.save(boardRequestDTO.toBoardEntity());

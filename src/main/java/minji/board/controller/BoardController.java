@@ -17,9 +17,16 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/boards")
-    public ResponseEntity<List<BoardEntity>> findBoard(){
+    public ResponseEntity<List<BoardEntity>> findBoardList(){
         List<BoardEntity> boardEntityList = boardService.getBoardList();
         return new ResponseEntity<>(boardEntityList, HttpStatus.OK);
+    }
+    @GetMapping("/boards/{boardId}")
+    public ResponseEntity<BoardEntity> findBoard(
+            @PathVariable Long boardId
+    ){
+        BoardEntity responseBoard = boardService.getBoard(boardId);
+        return new ResponseEntity<>(responseBoard, HttpStatus.OK);
     }
     @PostMapping("/boards")
     public ResponseEntity<BoardEntity> createBoard(
