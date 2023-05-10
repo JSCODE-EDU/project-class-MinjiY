@@ -47,5 +47,8 @@ public class BoardService {
         return "DeleteBoard OK";
     }
 
-
+    public List<BoardEntity> searchList(String keyword){
+        List<BoardEntity> findBoardList = boardRepository.findTop100ByTitleContainingOrderByCreatedAtDesc(keyword);
+        return findBoardList;
+    }
 }

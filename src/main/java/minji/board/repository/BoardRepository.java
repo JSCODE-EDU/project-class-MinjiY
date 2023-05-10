@@ -2,8 +2,9 @@ package minji.board.repository;
 
 import minji.board.model.BoardEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
 public interface BoardRepository extends JpaRepository<BoardEntity, Long> {
 
+    List<BoardEntity> findTop100ByTitleContainingOrderByCreatedAtDesc(String keyword);
 }
