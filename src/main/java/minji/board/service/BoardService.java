@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import minji.board.controller.dto.BoardRequestDTO;
 import minji.board.model.BoardEntity;
 import minji.board.repository.BoardRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +18,7 @@ public class BoardService {
 
     @Transactional(readOnly = true)
     public List<BoardEntity> getBoardList(){
-        List<BoardEntity> findBoardList = boardRepository.findAll();
+        List<BoardEntity> findBoardList = boardRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
         return findBoardList;
     }
 
