@@ -47,6 +47,7 @@ public class BoardService {
         return "DeleteBoard OK";
     }
 
+    @Transactional(readOnly = true)
     public List<BoardEntity> searchList(String keyword){
         List<BoardEntity> boardList = boardRepository.findTop100ByTitleContainingOrderByCreatedAtDesc(keyword);
         return boardList;
