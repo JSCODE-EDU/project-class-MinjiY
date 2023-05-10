@@ -18,7 +18,7 @@ public class BoardService {
 
     @Transactional(readOnly = true)
     public List<BoardEntity> getBoardList(){
-        List<BoardEntity> findBoardList = boardRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
+        List<BoardEntity> findBoardList = boardRepository.findTop100ByOrderByCreatedAtDesc();
         return findBoardList;
     }
 
