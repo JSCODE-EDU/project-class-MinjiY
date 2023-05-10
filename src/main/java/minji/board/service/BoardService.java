@@ -18,8 +18,8 @@ public class BoardService {
 
     @Transactional(readOnly = true)
     public List<BoardEntity> getBoardList(){
-        List<BoardEntity> findBoardList = boardRepository.findTop100ByOrderByCreatedAtDesc();
-        return findBoardList;
+        List<BoardEntity> boardList = boardRepository.findTop100ByOrderByCreatedAtDesc();
+        return boardList;
     }
 
     @Transactional(readOnly = true)
@@ -36,10 +36,10 @@ public class BoardService {
 
     @Transactional
     public BoardEntity setBoard(Long boardId, BoardRequestDTO boardRequestDTO){
-        BoardEntity board = boardRepository.findById(boardId).orElseThrow(IllegalArgumentException::new);
-        board.setBoard(boardRequestDTO.getTitle(), boardRequestDTO.getContent());
-        BoardEntity responseBoard = boardRepository.save(board);
-        return responseBoard;
+        BoardEntity findBoard = boardRepository.findById(boardId).orElseThrow(IllegalArgumentException::new);
+        findBoard.setBoard(boardRequestDTO.getTitle(), boardRequestDTO.getContent());
+        BoardEntity board = boardRepository.save(findBoard);
+        return board;
     }
     @Transactional
     public String deleteBoard(Long boardId){
@@ -47,8 +47,9 @@ public class BoardService {
         return "DeleteBoard OK";
     }
 
+    @Transactional(readOnly = true)
     public List<BoardEntity> searchList(String keyword){
-        List<BoardEntity> findBoardList = boardRepository.findTop100ByTitleContainingOrderByCreatedAtDesc(keyword);
-        return findBoardList;
+        List<BoardEntity> boardList = boardRepository.findTop100ByTitleContainingOrderByCreatedAtDesc(keyword);
+        return boardList;
     }
 }
