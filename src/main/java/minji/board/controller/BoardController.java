@@ -53,4 +53,13 @@ public class BoardController {
         String response = boardService.deleteBoard(boardId);
         return new ResponseEntity(response, HttpStatus.OK);
     }
+
+    @GetMapping("/boards/search")
+    public ResponseEntity<List<BoardEntity>> searchBoard(
+        @RequestParam String keyword
+    ){
+        List<BoardEntity> response = boardService.searchList(keyword);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
 }
