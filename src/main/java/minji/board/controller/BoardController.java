@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -24,7 +25,7 @@ public class BoardController {
 
     @PostMapping("/boards")
     public ResponseEntity<BoardEntity> createBoard(
-            @RequestBody BoardRequestDTO boardRequestDTO
+            @Valid @RequestBody BoardRequestDTO boardRequestDTO
     ){
         BoardEntity responseBoard = boardService.create(boardRequestDTO);
         return new ResponseEntity<>(responseBoard, HttpStatus.OK);
