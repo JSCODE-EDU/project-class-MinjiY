@@ -42,7 +42,7 @@ public class BoardController {
     @PutMapping("/boards/{boardId}")
     public ResponseEntity<BoardEntity> UpdateBoard(
             @PathVariable Long boardId,
-            @RequestBody BoardRequestDTO boardRequestDTO
+            @Valid @RequestBody BoardRequestDTO boardRequestDTO
     ){
         BoardEntity responseBoard = boardService.setBoard(boardId, boardRequestDTO);
         return new ResponseEntity<>(responseBoard, HttpStatus.OK);
