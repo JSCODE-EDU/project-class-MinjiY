@@ -17,6 +17,7 @@ public class BoardEntity extends BaseTimeEntity{
     private Long boardId;
 
     private String title;
+    @Column(length= 1000)
     private String content;
 
     public BoardEntity(String title, String content){
