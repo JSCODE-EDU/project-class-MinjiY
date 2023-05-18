@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @RestController
@@ -57,7 +59,7 @@ public class BoardController {
 
     @GetMapping("/boards/search")
     public ResponseEntity<List<BoardEntity>> searchBoard(
-        @RequestParam String keyword
+            @Valid @RequestParam @NotBlank @Size(message = "검색어는 1글자 이상입니다.", min = 1) String keyword
     ){
         List<BoardEntity> response = boardService.searchList(keyword);
         return new ResponseEntity<>(response, HttpStatus.OK);
