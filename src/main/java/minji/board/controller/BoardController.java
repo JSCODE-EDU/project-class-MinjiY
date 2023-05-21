@@ -21,24 +21,24 @@ public class BoardController {
 
     @GetMapping("/boards")
     public ResponseEntity<List<BoardEntity>> findBoardList(){
-        List<BoardEntity> boardEntityList = boardService.getBoardList();
-        return new ResponseEntity<>(boardEntityList, HttpStatus.OK);
+        List<BoardEntity> response = boardService.getBoardList();
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("/boards")
     public ResponseEntity<BoardEntity> createBoard(
             @Valid @RequestBody BoardRequestDTO boardRequestDTO
     ){
-        BoardEntity responseBoard = boardService.create(boardRequestDTO);
-        return new ResponseEntity<>(responseBoard, HttpStatus.OK);
+        BoardEntity response = boardService.create(boardRequestDTO);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/boards/{boardId}")
     public ResponseEntity<BoardEntity> findBoard(
             @PathVariable Long boardId
     ){
-        BoardEntity responseBoard = boardService.getBoard(boardId);
-        return new ResponseEntity<>(responseBoard, HttpStatus.OK);
+        BoardEntity response = boardService.getBoard(boardId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PutMapping("/boards/{boardId}")
@@ -46,8 +46,8 @@ public class BoardController {
             @PathVariable Long boardId,
             @Valid @RequestBody BoardRequestDTO boardRequestDTO
     ){
-        BoardEntity responseBoard = boardService.setBoard(boardId, boardRequestDTO);
-        return new ResponseEntity<>(responseBoard, HttpStatus.OK);
+        BoardEntity response = boardService.setBoard(boardId, boardRequestDTO);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
     @DeleteMapping("/boards/{boardId}")
     public ResponseEntity deleteBoard(
