@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @RestController
@@ -18,33 +21,33 @@ public class BoardController {
 
     @GetMapping("/boards")
     public ResponseEntity<List<BoardEntity>> findBoardList(){
-        List<BoardEntity> boardEntityList = boardService.getBoardList();
-        return new ResponseEntity<>(boardEntityList, HttpStatus.OK);
+        List<BoardEntity> response = boardService.getBoardList();
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("/boards")
     public ResponseEntity<BoardEntity> createBoard(
-            @RequestBody BoardRequestDTO boardRequestDTO
+            @Valid @RequestBody BoardRequestDTO boardRequestDTO
     ){
-        BoardEntity responseBoard = boardService.create(boardRequestDTO);
-        return new ResponseEntity<>(responseBoard, HttpStatus.OK);
+        BoardEntity response = boardService.create(boardRequestDTO);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/boards/{boardId}")
     public ResponseEntity<BoardEntity> findBoard(
             @PathVariable Long boardId
     ){
-        BoardEntity responseBoard = boardService.getBoard(boardId);
-        return new ResponseEntity<>(responseBoard, HttpStatus.OK);
+        BoardEntity response = boardService.getBoard(boardId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PutMapping("/boards/{boardId}")
     public ResponseEntity<BoardEntity> UpdateBoard(
             @PathVariable Long boardId,
-            @RequestBody BoardRequestDTO boardRequestDTO
+            @Valid @RequestBody BoardRequestDTO boardRequestDTO
     ){
-        BoardEntity responseBoard = boardService.setBoard(boardId, boardRequestDTO);
-        return new ResponseEntity<>(responseBoard, HttpStatus.OK);
+        BoardEntity response = boardService.setBoard(boardId, boardRequestDTO);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
     @DeleteMapping("/boards/{boardId}")
     public ResponseEntity deleteBoard(
@@ -56,7 +59,7 @@ public class BoardController {
 
     @GetMapping("/boards/search")
     public ResponseEntity<List<BoardEntity>> searchBoard(
-        @RequestParam String keyword
+            @Valid @RequestParam @NotBlank @Size(message = "검색어는 1글자 이상입니다.", min = 1) String keyword
     ){
         List<BoardEntity> response = boardService.searchList(keyword);
         return new ResponseEntity<>(response, HttpStatus.OK);
