@@ -48,4 +48,13 @@ public class ExceptionControllerAdvice {
         ExceptionResponse response = ExceptionResponse.of(ex, request);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
+
+    /*
+        이외의 모든 에러
+     */
+    @ExceptionHandler(Exception.class)
+    protected ResponseEntity<ExceptionResponse> handleException(Exception ex, HttpServletRequest request){
+        ExceptionResponse response = ExceptionResponse.of(ex,request);
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
 }

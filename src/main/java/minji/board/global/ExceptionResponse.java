@@ -46,4 +46,7 @@ public class ExceptionResponse {
     public static ExceptionResponse of(HttpRequestMethodNotSupportedException ex, HttpServletRequest request){
         return new ExceptionResponse(BoardExceptionCode.METHOD_NOT_ALLOWED, request.getRequestURI(), ex.getMessage());
     }
+    public static ExceptionResponse of(Exception ex, HttpServletRequest request){
+        return new ExceptionResponse(BoardExceptionCode.INTERNAL, request.getRequestURI(), ex.getMessage());
+    }
 }
