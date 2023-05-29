@@ -35,6 +35,9 @@ public class ExceptionControllerAdvice {
         ExceptionResponse response = ExceptionResponse.of(ex, request);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
+    /*
+        지원하지 않는 HTTP method 호출할 경우 예외처리
+    */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     protected ResponseEntity<ExceptionResponse> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex, HttpServletRequest request){
         HttpHeaders headers = new HttpHeaders();
