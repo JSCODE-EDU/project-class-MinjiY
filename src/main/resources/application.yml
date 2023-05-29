@@ -1,29 +1,9 @@
+server:
+  port: 8080
+
 spring:
+  profiles:
+    active: local
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/board
-    username: root
-    password: root
-
-  jpa:
-    hibernate:
-      ddl-auto: none
-    properties:
-      hibernate:
-        show_sql: true
-        format_sql: true
-        use_sql_comments: true
-
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
-
-logging:
-  level:
-    root: info
-    org:
-      hibernate:
-        SQL: info
-        type:
-          descriptor:
-            sql: info
