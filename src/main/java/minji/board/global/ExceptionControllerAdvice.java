@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 @RestControllerAdvice
 public class ExceptionControllerAdvice {
 
+    /*
+        비즈니스로직 에러 예외처리
+     */
     @ExceptionHandler(BoardException.class)
     protected ResponseEntity<ExceptionResponse> handleBusinessCustomException(BoardException ex, HttpServletRequest request)
     {
