@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 public enum BoardExceptionCode {
 
+    INVALID_INPUT_VALUE("Invalid Input Value", "E001", HttpStatus.BAD_REQUEST),
     BOARD_NOT_FOUND( "Board Not Found.","B001", HttpStatus.NOT_FOUND);
 
     private final String message;

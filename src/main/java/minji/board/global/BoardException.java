@@ -10,5 +10,4 @@ public class BoardException extends RuntimeException{
     public BoardException(BoardExceptionCode code){
         this.boardExceptionCode = code;
     }
-
 }

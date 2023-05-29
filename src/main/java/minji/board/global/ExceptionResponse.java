@@ -3,6 +3,7 @@ package minji.board.global;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
@@ -25,10 +26,19 @@ public class ExceptionResponse {
         this.uri = uri;
         this.timestamp = LocalDateTime.now();
     }
-
+    public ExceptionResponse(BoardExceptionCode code, String uri, String message){
+        this.message = message;
+        this.code = code.getCode();
+        this.status = code.getStatus();
+        this.uri = uri;
+        this.timestamp = LocalDateTime.now();
+    }
     // of
     public static ExceptionResponse of(BoardExceptionCode code, HttpServletRequest request ){
         return new ExceptionResponse(code ,request.getRequestURI());
     }
 
+    public static ExceptionResponse of(MethodArgumentNotValidException ex, HttpServletRequest request){
+        return new ExceptionResponse(BoardExceptionCode.INVALID_INPUT_VALUE, request.getRequestURI(), ex.getMessage());
+    }
 }
