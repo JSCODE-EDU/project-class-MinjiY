@@ -1,12 +1,18 @@
 package minji.board.global;
 
 
+import io.swagger.models.Response;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Set;
 
 @RestControllerAdvice
 public class ExceptionControllerAdvice {
@@ -26,6 +32,16 @@ public class ExceptionControllerAdvice {
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     protected ResponseEntity<ExceptionResponse> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpServletRequest request){
+        ExceptionResponse response = ExceptionResponse.of(ex, request);
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    protected ResponseEntity<ExceptionResponse> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex, HttpServletRequest request){
+        HttpHeaders headers = new HttpHeaders();
+        Set<HttpMethod> supportedMethods = ex.getSupportedHttpMethods();
+        if(!CollectionUtils.isEmpty(supportedMethods)){
+            headers.setAllow(supportedMethods);
+        }
         ExceptionResponse response = ExceptionResponse.of(ex, request);
         return ResponseEntity.status(response.getStatus()).body(response);
     }

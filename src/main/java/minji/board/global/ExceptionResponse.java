@@ -3,6 +3,7 @@ package minji.board.global;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,5 +41,9 @@ public class ExceptionResponse {
 
     public static ExceptionResponse of(MethodArgumentNotValidException ex, HttpServletRequest request){
         return new ExceptionResponse(BoardExceptionCode.INVALID_INPUT_VALUE, request.getRequestURI(), ex.getMessage());
+    }
+
+    public static ExceptionResponse of(HttpRequestMethodNotSupportedException ex, HttpServletRequest request){
+        return new ExceptionResponse(BoardExceptionCode.METHOD_NOT_ALLOWED, request.getRequestURI(), ex.getMessage());
     }
 }
